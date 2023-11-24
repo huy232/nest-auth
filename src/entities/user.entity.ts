@@ -5,8 +5,9 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { Comment } from './comment.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -20,6 +21,7 @@ export class User {
   email: string;
 
   @Column({ nullable: false })
+  @Exclude()
   password: string;
 
   @OneToMany(() => Comment, (comment) => comment.user)
